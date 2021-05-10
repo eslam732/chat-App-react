@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { ChatEngine } from "react-chat-engine";
 
-function App() {
+import ChatFeed from "./Components/ChatFeed";
+import LoginForm from './Components/loginForm'
+import "./App.css";
+
+const App = () => {
+  if(!localStorage.getItem('userName')) return <LoginForm/>
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChatEngine
+      height="100vh"
+      projectID="ee1fbd6a-f5f6-4a38-bfc0-7f06f8f56a52"
+      userName={localStorage.getItem('userName')}
+      userSecret={localStorage.getItem('password')}
+      renderChatFeed={(ChatAppProps) => <ChatFeed {...ChatAppProps} />}
+    />
   );
-}
+};
 
 export default App;
